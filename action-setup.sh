@@ -19,14 +19,9 @@ readonly PYTHON_VENV_PATH="${SCRIPT_PATH}/compilesketches/.venv"
 readonly PYTHON_VENV_ACTIVATE_SCRIPT_PATH="${PYTHON_VENV_PATH}/bin/activate"
 
 # Install Python
-sudo apt-get install --yes software-properties-common > /dev/null
-sudo add-apt-repository --yes ppa:deadsnakes/ppa > /dev/null
-sudo apt-get update --yes > /dev/null
-sudo apt-get install --yes python${PYTHON_PACKAGE_VERSION} > /dev/null
-echo "Using Python version: $("$PYTHON_COMMAND" --version)"
 
-sudo apt-get install --yes python3-setuptools > /dev/null
-sudo apt-get install --yes python${PYTHON_PACKAGE_VERSION}-venv > /dev/null
+python3 -m pip install pip setuptools wheel
+python3 -m venv python${PYTHON_PACKAGE_VERSION}-venv > /dev/null
 
 # Create Python virtual environment
 "$PYTHON_COMMAND" -m venv --system-site-packages "$PYTHON_VENV_PATH"

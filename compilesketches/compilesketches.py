@@ -12,6 +12,7 @@ import sys
 import tempfile
 import urllib
 import urllib.request
+import platform
 
 import git
 import gitdb.exc
@@ -227,7 +228,14 @@ class CompileSketches:
         """Install Arduino CLI."""
         self.verbose_print("Installing Arduino CLI version", self.cli_version)
         arduino_cli_archive_download_url_prefix = "https://downloads.arduino.cc/arduino-cli/"
-        arduino_cli_archive_file_name = "arduino-cli_" + self.cli_version + "_Linux_64bit.tar.gz"
+
+        sysname = platform.system()
+        if sysname == 'Linux':
+            arduino_cli_archive_file_name = "arduino-cli_" + self.cli_version + "_Linux_64bit.tar.gz"
+        elif sysname == 'Darwin':
+            arduino_cli_archive_file_name = "arduino-cli_" + self.cli_version + "_macOS_64bit.tar.gz"
+        elif sysname == 'Windows':
+            arduino_cli_archive_file_name = "arduino-cli_" + self.cli_version + "_Windows_64bit.zip"
 
         self.install_from_download(
             url=arduino_cli_archive_download_url_prefix + arduino_cli_archive_file_name,

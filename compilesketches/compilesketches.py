@@ -434,6 +434,8 @@ class CompileSketches:
         """
         debug_output_log_level = "warn"
         full_command = [self.arduino_cli_installation_path.joinpath("arduino-cli")]
+        print("Full:")
+        print(full_command)
         full_command.extend(command)
         if self.verbose:
             full_command.extend(["--log-level", debug_output_log_level, "--verbose"])
@@ -894,6 +896,8 @@ class CompileSketches:
             for cache_path in pathlib.Path("/tmp").glob(pattern="arduino*"):
                 shutil.rmtree(path=cache_path)
 
+        print("Compile command")
+        print(compilation_command)
         compilation_data = self.run_arduino_cli_command(
             command=compilation_command, enable_output=self.RunCommandOutput.NONE, exit_on_failure=False)
         # Group compilation output to make the log easy to read
